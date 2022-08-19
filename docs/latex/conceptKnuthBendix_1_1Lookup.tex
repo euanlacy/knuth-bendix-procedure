@@ -1,0 +1,42 @@
+\hypertarget{conceptKnuthBendix_1_1Lookup}{}\doxysection{Knuth\+Bendix\+::Lookup Concept Reference}
+\label{conceptKnuthBendix_1_1Lookup}\index{KnuthBendix::Lookup@{KnuthBendix::Lookup}}
+
+
+Lookup strategies provide methods to rewrite strings, and to update their internal data structures when rules are inserted and removed.  
+
+
+
+
+{\ttfamily \#include $<$knuth\+\_\+bendix.\+hpp$>$}
+
+\doxysubsection{Concept definition}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} L>}
+\DoxyCodeLine{\textcolor{keyword}{concept }\mbox{\hyperlink{conceptKnuthBendix_1_1Lookup}{KnuthBendix::Lookup}} =  \textcolor{keyword}{requires}(}
+\DoxyCodeLine{    L l,}
+\DoxyCodeLine{    \textcolor{keyword}{const} std::vector<Rule>\& rules,}
+\DoxyCodeLine{    \textcolor{keyword}{const} std::vector<bool>\& active,}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keywordtype}{int}\& n\_active,}
+\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}}\& rule,}
+\DoxyCodeLine{    \textcolor{keywordtype}{size\_t} idx,}
+\DoxyCodeLine{    std::string\& string}
+\DoxyCodeLine{) \{}
+\DoxyCodeLine{    \{ L(rules, active, n\_active, 100) \} -\/> std::same\_as<L>;}
+\DoxyCodeLine{    }
+\DoxyCodeLine{    l.insert(rule, idx);}
+\DoxyCodeLine{    }
+\DoxyCodeLine{    l.remove(rule);}
+\DoxyCodeLine{    }
+\DoxyCodeLine{    l.rewrite(\textcolor{keywordtype}{string});}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Detailed Description}
+Lookup strategies provide methods to rewrite strings, and to update their internal data structures when rules are inserted and removed. 
+
+This defines the interface to a lookup strategy.
+
+Lookups are intended to take and store references to the rule list, active list and number of active rules. 

@@ -1,0 +1,52 @@
+\hypertarget{namespaceKnuthBendix}{}\doxysection{Knuth\+Bendix Namespace Reference}
+\label{namespaceKnuthBendix}\index{KnuthBendix@{KnuthBendix}}
+
+
+This is the root namespace.  
+
+
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structKnuthBendix_1_1HatTrieLookup}{Hat\+Trie\+Lookup}}
+\item 
+struct \mbox{\hyperlink{structKnuthBendix_1_1KnuthBendixState}{Knuth\+Bendix\+State}}
+\begin{DoxyCompactList}\small\item\em Contains the state of the Knuth-\/\+Bendix procedure. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structKnuthBendix_1_1NaiveLookup}{Naive\+Lookup}}
+\begin{DoxyCompactList}\small\item\em This lookup strategy simply searches every rule in the rule list for a substring match, as such it requires no additional data structures, but has time complexity which scales linearly with the number of rules in the system. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structKnuthBendix_1_1OrderedLookup}{Ordered\+Lookup}}
+\item 
+struct \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}}
+\begin{DoxyCompactList}\small\item\em A rule contains two strings, and defines a mapping from the left to the right. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structKnuthBendix_1_1TrieLookup}{Trie\+Lookup}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Concepts}
+\begin{DoxyCompactItemize}
+\item 
+concept \mbox{\hyperlink{conceptKnuthBendix_1_1Lookup}{Lookup}}
+\begin{DoxyCompactList}\small\item\em Lookup strategies provide methods to rewrite strings, and to update their internal data structures when rules are inserted and removed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{namespaceKnuthBendix_a27c475c238e31c37abb84dd84421ad8d}\label{namespaceKnuthBendix_a27c475c238e31c37abb84dd84421ad8d}} 
+using {\bfseries Rule\+Index} = size\+\_\+t
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{namespaceKnuthBendix_a6f5d5c90d7ac0ebc5ffe603ddd432563}\label{namespaceKnuthBendix_a6f5d5c90d7ac0ebc5ffe603ddd432563}} 
+auto {\bfseries shortlex\+\_\+compare} (const std\+::string \&lhs, const std\+::string \&rhs)
+\item 
+\mbox{\Hypertarget{namespaceKnuthBendix_a23186d5d6dc8951dac2d83b126315c8a}\label{namespaceKnuthBendix_a23186d5d6dc8951dac2d83b126315c8a}} 
+{\footnotesize template$<$Lookup L$>$ }\\std\+::vector$<$ \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}} $>$ {\bfseries knuthbendix} (const std\+::vector$<$ \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}} $>$ \&initial\+\_\+rules)
+\begin{DoxyCompactList}\small\item\em Runs the Knuth-\/\+Bendix procedure on {\ttfamily initial\+\_\+rules}, hopefully returning a confluent rule rewriting system. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespaceKnuthBendix_aba51f9dedef706c87f2ffc0c0655a4cc}\label{namespaceKnuthBendix_aba51f9dedef706c87f2ffc0c0655a4cc}} 
+std\+::strong\+\_\+ordering {\bfseries reverse\+\_\+lex} (const std\+::string\+\_\+view lhs, const std\+::string\+\_\+view rhs)
+\item 
+\mbox{\Hypertarget{namespaceKnuthBendix_abaa5893023d55fc2a488fc3c11d7f0b6}\label{namespaceKnuthBendix_abaa5893023d55fc2a488fc3c11d7f0b6}} 
+std\+::strong\+\_\+ordering {\bfseries compare\+\_\+prefix} (const std\+::string\+\_\+view lhs, const std\+::string\+\_\+view rhs)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This is the root namespace. 

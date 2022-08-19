@@ -1,0 +1,46 @@
+\hypertarget{structKnuthBendix_1_1NaiveLookup}{}\doxysection{Knuth\+Bendix\+::Naive\+Lookup Struct Reference}
+\label{structKnuthBendix_1_1NaiveLookup}\index{KnuthBendix::NaiveLookup@{KnuthBendix::NaiveLookup}}
+
+
+This lookup strategy simply searches every rule in the rule list for a substring match, as such it requires no additional data structures, but has time complexity which scales linearly with the number of rules in the system.  
+
+
+
+
+{\ttfamily \#include $<$naive\+\_\+lookup.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1NaiveLookup_a8b902e258c11a9f3e505626816e2fc3c}\label{structKnuthBendix_1_1NaiveLookup_a8b902e258c11a9f3e505626816e2fc3c}} 
+{\bfseries Naive\+Lookup} (const std\+::vector$<$ \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}} $>$ \&rules, const std\+::vector$<$ bool $>$ \&active, const int \&n\+\_\+active, size\+\_\+t capacity)
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1NaiveLookup_aadd7d7b9db9c761c6316591518217d08}\label{structKnuthBendix_1_1NaiveLookup_aadd7d7b9db9c761c6316591518217d08}} 
+void {\bfseries rewrite} (std\+::string \&string)
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1NaiveLookup_a2203de923286761e8f4c103c43410634}\label{structKnuthBendix_1_1NaiveLookup_a2203de923286761e8f4c103c43410634}} 
+void {\bfseries insert} (const \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}} \&rule, size\+\_\+t idx)
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1NaiveLookup_a9871228b2d351ce1b004bab3e8d9d38e}\label{structKnuthBendix_1_1NaiveLookup_a9871228b2d351ce1b004bab3e8d9d38e}} 
+void {\bfseries remove} (const \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}} \&rule)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1NaiveLookup_a976cd9081d177aa888201fee08a325c5}\label{structKnuthBendix_1_1NaiveLookup_a976cd9081d177aa888201fee08a325c5}} 
+const std\+::vector$<$ \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}} $>$ \& {\bfseries rules}
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1NaiveLookup_add220beaa1389968073fa8db10848b24}\label{structKnuthBendix_1_1NaiveLookup_add220beaa1389968073fa8db10848b24}} 
+const std\+::vector$<$ bool $>$ \& {\bfseries active}
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1NaiveLookup_ade1842d0dc7865cf099b16dfc5fb1b67}\label{structKnuthBendix_1_1NaiveLookup_ade1842d0dc7865cf099b16dfc5fb1b67}} 
+const int \& {\bfseries n\+\_\+active}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This lookup strategy simply searches every rule in the rule list for a substring match, as such it requires no additional data structures, but has time complexity which scales linearly with the number of rules in the system. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Knuth\+Bendix/naive\+\_\+lookup.\+hpp\end{DoxyCompactItemize}

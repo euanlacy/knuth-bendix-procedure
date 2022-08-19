@@ -1,0 +1,37 @@
+\hypertarget{structKnuthBendix_1_1Rule}{}\doxysection{Knuth\+Bendix\+::Rule Struct Reference}
+\label{structKnuthBendix_1_1Rule}\index{KnuthBendix::Rule@{KnuthBendix::Rule}}
+
+
+A rule contains two strings, and defines a mapping from the left to the right.  
+
+
+
+
+{\ttfamily \#include $<$knuth\+\_\+bendix.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1Rule_a9128a8ed6e7c1631ad0face8c55cf65f}\label{structKnuthBendix_1_1Rule_a9128a8ed6e7c1631ad0face8c55cf65f}} 
+{\bfseries Rule} (std\+::string \mbox{\hyperlink{structKnuthBendix_1_1Rule_a983ec8bafa65e3c1721338b29ebf8092}{left}}, std\+::string \mbox{\hyperlink{structKnuthBendix_1_1Rule_ac672af52f49fc1815e313cebb45b02ca}{right}})
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1Rule_ae8d49430fc4638067da3a0af0294c4d4}\label{structKnuthBendix_1_1Rule_ae8d49430fc4638067da3a0af0294c4d4}} 
+int {\bfseries order} ()
+\begin{DoxyCompactList}\small\item\em Swaps left and right such that left \texorpdfstring{$<$}{<}= right under length-\/lexicographical ordering. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1Rule_a983ec8bafa65e3c1721338b29ebf8092}\label{structKnuthBendix_1_1Rule_a983ec8bafa65e3c1721338b29ebf8092}} 
+std\+::string {\bfseries left}
+\begin{DoxyCompactList}\small\item\em The left hand side of the mapping, is greater than the rhs under shortlex. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1Rule_ac672af52f49fc1815e313cebb45b02ca}\label{structKnuthBendix_1_1Rule_ac672af52f49fc1815e313cebb45b02ca}} 
+std\+::string {\bfseries right}
+\begin{DoxyCompactList}\small\item\em The right hand side of the mapping, is less than the lhs under shortlex. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A rule contains two strings, and defines a mapping from the left to the right. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Knuth\+Bendix/knuth\+\_\+bendix.\+hpp\end{DoxyCompactItemize}

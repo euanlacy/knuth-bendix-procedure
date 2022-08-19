@@ -1,0 +1,46 @@
+\hypertarget{structKnuthBendix_1_1OrderedLookup}{}\doxysection{Knuth\+Bendix\+::Ordered\+Lookup Struct Reference}
+\label{structKnuthBendix_1_1OrderedLookup}\index{KnuthBendix::OrderedLookup@{KnuthBendix::OrderedLookup}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1OrderedLookup_a25e1b569a9006279a6c610ac5153f993}\label{structKnuthBendix_1_1OrderedLookup_a25e1b569a9006279a6c610ac5153f993}} 
+void {\bfseries print} ()
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1OrderedLookup_a73b1046b021790dc4e5e7d2fdf3f4bfd}\label{structKnuthBendix_1_1OrderedLookup_a73b1046b021790dc4e5e7d2fdf3f4bfd}} 
+{\bfseries Ordered\+Lookup} (const std\+::vector$<$ \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}} $>$ \&rules, const std\+::vector$<$ bool $>$ \&active, const int \&n\+\_\+active, size\+\_\+t capacity)
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1OrderedLookup_a0c67d0ab276bdd65d0dae19189358045}\label{structKnuthBendix_1_1OrderedLookup_a0c67d0ab276bdd65d0dae19189358045}} 
+Rule\+Index {\bfseries binary\+\_\+search} (const \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}} \&rule)
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1OrderedLookup_a45afede13f2222b3a199442cf36f0e90}\label{structKnuthBendix_1_1OrderedLookup_a45afede13f2222b3a199442cf36f0e90}} 
+std\+::optional$<$ Rule\+Index $>$ {\bfseries find\+\_\+suffix} (const std\+::string\+\_\+view string)
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1OrderedLookup_ace144a07e9b4ff4ce6f4c8e68b63847b}\label{structKnuthBendix_1_1OrderedLookup_ace144a07e9b4ff4ce6f4c8e68b63847b}} 
+void {\bfseries rewrite} (std\+::string \&string)
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1OrderedLookup_a14b8966dc1ff0f1e9d4fa35fd27d71e1}\label{structKnuthBendix_1_1OrderedLookup_a14b8966dc1ff0f1e9d4fa35fd27d71e1}} 
+void {\bfseries insert} (const \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}} \&rule, size\+\_\+t idx)
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1OrderedLookup_a3e182b5ff9a5bed6377b29741ec8e884}\label{structKnuthBendix_1_1OrderedLookup_a3e182b5ff9a5bed6377b29741ec8e884}} 
+void {\bfseries remove} (const \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}} \&rule)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1OrderedLookup_a0cf646212634699eea737813099e0a22}\label{structKnuthBendix_1_1OrderedLookup_a0cf646212634699eea737813099e0a22}} 
+const std\+::vector$<$ \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}} $>$ \& {\bfseries rules}
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1OrderedLookup_a8a7aea52972122da4169ea88f2bc2eb6}\label{structKnuthBendix_1_1OrderedLookup_a8a7aea52972122da4169ea88f2bc2eb6}} 
+const std\+::vector$<$ bool $>$ \& {\bfseries active}
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1OrderedLookup_a2da34954f428244fd867002b88585a26}\label{structKnuthBendix_1_1OrderedLookup_a2da34954f428244fd867002b88585a26}} 
+const int \& {\bfseries n\+\_\+active}
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1OrderedLookup_a7ab413fa2909a4aa70d90b575ae76312}\label{structKnuthBendix_1_1OrderedLookup_a7ab413fa2909a4aa70d90b575ae76312}} 
+std\+::vector$<$ Rule\+Index $>$ {\bfseries sorted\+\_\+indices}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Knuth\+Bendix/ordered\+\_\+lookup.\+hpp\end{DoxyCompactItemize}

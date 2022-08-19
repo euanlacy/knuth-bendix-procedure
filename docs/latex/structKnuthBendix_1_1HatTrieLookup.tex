@@ -1,0 +1,43 @@
+\hypertarget{structKnuthBendix_1_1HatTrieLookup}{}\doxysection{Knuth\+Bendix\+::Hat\+Trie\+Lookup Struct Reference}
+\label{structKnuthBendix_1_1HatTrieLookup}\index{KnuthBendix::HatTrieLookup@{KnuthBendix::HatTrieLookup}}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1HatTrieLookup_a76d4be8c47948c351543464743d32efb}\label{structKnuthBendix_1_1HatTrieLookup_a76d4be8c47948c351543464743d32efb}} 
+using {\bfseries Rule\+Index} = size\+\_\+t
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1HatTrieLookup_aaea58916cb815bc968d0721917c79e0d}\label{structKnuthBendix_1_1HatTrieLookup_aaea58916cb815bc968d0721917c79e0d}} 
+{\bfseries Hat\+Trie\+Lookup} (const std\+::vector$<$ \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}} $>$ \&rules, const std\+::vector$<$ bool $>$ \&active, const int \&n\+\_\+active, size\+\_\+t capacity)
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1HatTrieLookup_a30eea086460953256444d7f610553159}\label{structKnuthBendix_1_1HatTrieLookup_a30eea086460953256444d7f610553159}} 
+void {\bfseries rewrite} (std\+::string \&string)
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1HatTrieLookup_a66d02e3aa72c06a3c65361633b54ae96}\label{structKnuthBendix_1_1HatTrieLookup_a66d02e3aa72c06a3c65361633b54ae96}} 
+void {\bfseries insert} (const \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}} \&rule, Rule\+Index idx)
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1HatTrieLookup_ad99670095a549855ff861060c3ec8652}\label{structKnuthBendix_1_1HatTrieLookup_ad99670095a549855ff861060c3ec8652}} 
+void {\bfseries remove} (const \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}} \&rule)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1HatTrieLookup_aff55a1f801cea115596d127b959d407e}\label{structKnuthBendix_1_1HatTrieLookup_aff55a1f801cea115596d127b959d407e}} 
+const std\+::vector$<$ \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}} $>$ \& {\bfseries rules}
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1HatTrieLookup_aee9e938a7cfa7e8e8327464955913254}\label{structKnuthBendix_1_1HatTrieLookup_aee9e938a7cfa7e8e8327464955913254}} 
+const std\+::vector$<$ bool $>$ \& {\bfseries active}
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1HatTrieLookup_a9a582c1cc82bb748f26ad22a22bbbd6e}\label{structKnuthBendix_1_1HatTrieLookup_a9a582c1cc82bb748f26ad22a22bbbd6e}} 
+const int \& {\bfseries n\+\_\+active}
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1HatTrieLookup_afa3951d78525aec78c88cdf7d4ffc346}\label{structKnuthBendix_1_1HatTrieLookup_afa3951d78525aec78c88cdf7d4ffc346}} 
+tsl\+::htrie\+\_\+map$<$ char, int $>$ {\bfseries map}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Knuth\+Bendix/hattrie\+\_\+lookup.\+hpp\end{DoxyCompactItemize}

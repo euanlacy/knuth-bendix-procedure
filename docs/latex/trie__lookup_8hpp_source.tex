@@ -1,0 +1,130 @@
+\hypertarget{trie__lookup_8hpp_source}{}\doxysection{trie\+\_\+lookup.\+hpp}
+\label{trie__lookup_8hpp_source}\index{include/KnuthBendix/trie\_lookup.hpp@{include/KnuthBendix/trie\_lookup.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// Copyright (C) 2022 Euan Lacy}}
+\DoxyCodeLine{2 \textcolor{comment}{//}}
+\DoxyCodeLine{3 \textcolor{comment}{// This program is free software: you can redistribute it and/or modify}}
+\DoxyCodeLine{4 \textcolor{comment}{// it under the terms of the GNU General Public License as published by}}
+\DoxyCodeLine{5 \textcolor{comment}{// the Free Software Foundation, either version 3 of the License, or}}
+\DoxyCodeLine{6 \textcolor{comment}{// (at your option) any later version.}}
+\DoxyCodeLine{7 \textcolor{comment}{//}}
+\DoxyCodeLine{8 \textcolor{comment}{// This program is distributed in the hope that it will be useful,}}
+\DoxyCodeLine{9 \textcolor{comment}{// but WITHOUT ANY WARRANTY; without even the implied warranty of}}
+\DoxyCodeLine{10 \textcolor{comment}{// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the}}
+\DoxyCodeLine{11 \textcolor{comment}{// GNU General Public License for more details.}}
+\DoxyCodeLine{12 \textcolor{comment}{//}}
+\DoxyCodeLine{13 \textcolor{comment}{// You should have received a copy of the GNU General Public License}}
+\DoxyCodeLine{14 \textcolor{comment}{// along with this program.  If not, see <http://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#ifndef TRIE\_LOOKUP\_HPP}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#define TRIE\_LOOKUP\_HPP}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include <array>}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#include <optional>}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#include "{}knuth\_bendix.hpp"{}}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceKnuthBendix}{KnuthBendix}} \{}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{keyword}{struct }\mbox{\hyperlink{structKnuthBendix_1_1TrieLookup}{TrieLookup}} \{}
+\DoxyCodeLine{29     \textcolor{keyword}{const} \textcolor{keyword}{static} \textcolor{keywordtype}{size\_t} ALPHABET\_SIZE = 256;}
+\DoxyCodeLine{30     \textcolor{keyword}{struct }\mbox{\hyperlink{structKnuthBendix_1_1TrieLookup_1_1TrieNode}{TrieNode}};}
+\DoxyCodeLine{31     \textcolor{keyword}{using} TrieNodePtr = std::unique\_ptr<TrieNode>;}
+\DoxyCodeLine{32     \textcolor{keyword}{using} RuleIndex = size\_t;}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34     \textcolor{keyword}{struct }\mbox{\hyperlink{structKnuthBendix_1_1TrieLookup_1_1TrieNode}{TrieNode}} \{}
+\DoxyCodeLine{35         std::array<TrieNodePtr, ALPHABET\_SIZE> children; }
+\DoxyCodeLine{36         std::optional<RuleIndex> index;}
+\DoxyCodeLine{37     \};}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39     \textcolor{keyword}{const} std::vector<Rule>\& rules;}
+\DoxyCodeLine{40     \textcolor{keyword}{const} std::vector<bool>\& active;}
+\DoxyCodeLine{41     \textcolor{keyword}{const} \textcolor{keywordtype}{int}\& n\_active;}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43     std::unique\_ptr<TrieNode> root;}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45     \mbox{\hyperlink{structKnuthBendix_1_1TrieLookup}{TrieLookup}}() = \textcolor{keyword}{delete};}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47     \mbox{\hyperlink{structKnuthBendix_1_1TrieLookup}{TrieLookup}}(}
+\DoxyCodeLine{48         \textcolor{keyword}{const} std::vector<Rule>\& rules,}
+\DoxyCodeLine{49         \textcolor{keyword}{const} std::vector<bool>\& active,}
+\DoxyCodeLine{50         \textcolor{keyword}{const} \textcolor{keywordtype}{int}\& n\_active,}
+\DoxyCodeLine{51         \textcolor{keywordtype}{size\_t} capacity}
+\DoxyCodeLine{52     ) : rules(rules), active(active), n\_active(n\_active) \{}
+\DoxyCodeLine{53         this-\/>root = std::make\_unique<TrieNode>();}
+\DoxyCodeLine{54         (void)capacity;}
+\DoxyCodeLine{55     \}}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57     std::optional<RuleIndex> find(\textcolor{keyword}{const} std::string\_view \textcolor{keywordtype}{string}) \{}
+\DoxyCodeLine{58         std::optional<RuleIndex> index;}
+\DoxyCodeLine{59         TrieNode* trie = this-\/>root.get();}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{char} c : \textcolor{keywordtype}{string}) \{}
+\DoxyCodeLine{62             \textcolor{keywordflow}{if} (!trie-\/>children[c]) \{}
+\DoxyCodeLine{63                 \textcolor{keywordflow}{return} index;}
+\DoxyCodeLine{64             \}}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66             trie = trie-\/>children[c].get();}
+\DoxyCodeLine{67             \textcolor{keywordflow}{if} (trie-\/>index.has\_value()) \{}
+\DoxyCodeLine{68                 index = trie-\/>index;}
+\DoxyCodeLine{69             \}}
+\DoxyCodeLine{70         \}}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72         \textcolor{keywordflow}{return} index;}
+\DoxyCodeLine{73     \}}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75     \textcolor{keywordtype}{void} rewrite(std::string\& \textcolor{keywordtype}{string}) \{}
+\DoxyCodeLine{76         \textcolor{keywordtype}{size\_t} pos = 0;}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78         \textcolor{keywordflow}{while} (pos != \textcolor{keywordtype}{string}.length()) \{}
+\DoxyCodeLine{79             std::optional<RuleIndex> index = find(\{\textcolor{keywordtype}{string}.data() + pos, \textcolor{keywordtype}{string}.length() -\/ pos\});}
+\DoxyCodeLine{80             \textcolor{keywordflow}{if} (index.has\_value()) \{}
+\DoxyCodeLine{81                 \textcolor{keyword}{const} Rule\& rule = this-\/>rules[index.value()];}
+\DoxyCodeLine{82                 \textcolor{comment}{// Copy the rhs of the rule}}
+\DoxyCodeLine{83                 \textcolor{keywordtype}{string}.replace(pos, rule.right.length(), rule.right);}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85                 \textcolor{comment}{// Delete the difference between the lhs and rhs of the rule}}
+\DoxyCodeLine{86                 \textcolor{keywordtype}{string}.erase(pos + rule.right.length(), rule.left.length() -\/ rule.right.length());}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88                 pos = 0;}
+\DoxyCodeLine{89             \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{90                 pos++;}
+\DoxyCodeLine{91             \}}
+\DoxyCodeLine{92         \}}
+\DoxyCodeLine{93     \}}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95     \textcolor{keywordtype}{void} insert(\textcolor{keyword}{const} Rule\& rule, RuleIndex idx) \{}
+\DoxyCodeLine{96         TrieNode* trie = this-\/>root.get();}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{char} c : rule.left) \{}
+\DoxyCodeLine{99             TrieNodePtr\& ptr = trie-\/>children[c];}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101             \textcolor{keywordflow}{if} (!ptr) \{}
+\DoxyCodeLine{102                 ptr = std::make\_unique<TrieNode>();}
+\DoxyCodeLine{103             \}}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105             trie = ptr.get();}
+\DoxyCodeLine{106         \}}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108         trie-\/>index = idx;}
+\DoxyCodeLine{109     \}}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111     \textcolor{comment}{// Assumes the rule must exist}}
+\DoxyCodeLine{112     \textcolor{keywordtype}{void} remove(\textcolor{keyword}{const} Rule\& rule) \{}
+\DoxyCodeLine{113         TrieNode* trie = this-\/>root.get();}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{char} c : rule.left) \{}
+\DoxyCodeLine{116             trie = trie-\/>children[c].get();}
+\DoxyCodeLine{117         \}}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{119         trie-\/>index = \{\};}
+\DoxyCodeLine{120     \}}
+\DoxyCodeLine{121 \};}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123 \}}
+\DoxyCodeLine{124 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

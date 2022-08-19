@@ -1,0 +1,60 @@
+\hypertarget{structKnuthBendix_1_1TrieLookup}{}\doxysection{Knuth\+Bendix\+::Trie\+Lookup Struct Reference}
+\label{structKnuthBendix_1_1TrieLookup}\index{KnuthBendix::TrieLookup@{KnuthBendix::TrieLookup}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structKnuthBendix_1_1TrieLookup_1_1TrieNode}{Trie\+Node}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1TrieLookup_af12afcb4dc97b99e0ef9ff83bb844c27}\label{structKnuthBendix_1_1TrieLookup_af12afcb4dc97b99e0ef9ff83bb844c27}} 
+using {\bfseries Trie\+Node\+Ptr} = std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{structKnuthBendix_1_1TrieLookup_1_1TrieNode}{Trie\+Node}} $>$
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1TrieLookup_aa5a90e2f7651f7092f7e58c4aa00edc5}\label{structKnuthBendix_1_1TrieLookup_aa5a90e2f7651f7092f7e58c4aa00edc5}} 
+using {\bfseries Rule\+Index} = size\+\_\+t
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1TrieLookup_a2069dca43f8a1f037b2d01d4610fc302}\label{structKnuthBendix_1_1TrieLookup_a2069dca43f8a1f037b2d01d4610fc302}} 
+{\bfseries Trie\+Lookup} (const std\+::vector$<$ \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}} $>$ \&rules, const std\+::vector$<$ bool $>$ \&active, const int \&n\+\_\+active, size\+\_\+t capacity)
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1TrieLookup_a6e74427c77c23d62b615deb3d982c749}\label{structKnuthBendix_1_1TrieLookup_a6e74427c77c23d62b615deb3d982c749}} 
+std\+::optional$<$ Rule\+Index $>$ {\bfseries find} (const std\+::string\+\_\+view string)
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1TrieLookup_ad480ff1964bce4c29511b8813302d09f}\label{structKnuthBendix_1_1TrieLookup_ad480ff1964bce4c29511b8813302d09f}} 
+void {\bfseries rewrite} (std\+::string \&string)
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1TrieLookup_ad99439872605e58ab04768a2d857cd82}\label{structKnuthBendix_1_1TrieLookup_ad99439872605e58ab04768a2d857cd82}} 
+void {\bfseries insert} (const \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}} \&rule, Rule\+Index idx)
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1TrieLookup_ac21e16dde75f62b349987c2f9f5305c9}\label{structKnuthBendix_1_1TrieLookup_ac21e16dde75f62b349987c2f9f5305c9}} 
+void {\bfseries remove} (const \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}} \&rule)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1TrieLookup_ab618d8dcf3348ee9741fa686876a548d}\label{structKnuthBendix_1_1TrieLookup_ab618d8dcf3348ee9741fa686876a548d}} 
+const std\+::vector$<$ \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}} $>$ \& {\bfseries rules}
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1TrieLookup_a6e3da3723d03aa04cbe82a8cf5de3af8}\label{structKnuthBendix_1_1TrieLookup_a6e3da3723d03aa04cbe82a8cf5de3af8}} 
+const std\+::vector$<$ bool $>$ \& {\bfseries active}
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1TrieLookup_a7fd3508c6be6512b6fd6ef91a1b22dd9}\label{structKnuthBendix_1_1TrieLookup_a7fd3508c6be6512b6fd6ef91a1b22dd9}} 
+const int \& {\bfseries n\+\_\+active}
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1TrieLookup_a08126c91b6df186c964fe28fea497ebb}\label{structKnuthBendix_1_1TrieLookup_a08126c91b6df186c964fe28fea497ebb}} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{structKnuthBendix_1_1TrieLookup_1_1TrieNode}{Trie\+Node}} $>$ {\bfseries root}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1TrieLookup_a562aa4a2293484923e47fcf8f2c66290}\label{structKnuthBendix_1_1TrieLookup_a562aa4a2293484923e47fcf8f2c66290}} 
+static const size\+\_\+t {\bfseries ALPHABET\+\_\+\+SIZE} = 256
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Knuth\+Bendix/trie\+\_\+lookup.\+hpp\end{DoxyCompactItemize}

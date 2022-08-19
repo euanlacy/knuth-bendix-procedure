@@ -1,0 +1,224 @@
+\hypertarget{knuth__bendix_8hpp_source}{}\doxysection{knuth\+\_\+bendix.\+hpp}
+\label{knuth__bendix_8hpp_source}\index{include/KnuthBendix/knuth\_bendix.hpp@{include/KnuthBendix/knuth\_bendix.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// Copyright (C) 2022 Euan Lacy}}
+\DoxyCodeLine{2 \textcolor{comment}{//}}
+\DoxyCodeLine{3 \textcolor{comment}{// This program is free software: you can redistribute it and/or modify}}
+\DoxyCodeLine{4 \textcolor{comment}{// it under the terms of the GNU General Public License as published by}}
+\DoxyCodeLine{5 \textcolor{comment}{// the Free Software Foundation, either version 3 of the License, or}}
+\DoxyCodeLine{6 \textcolor{comment}{// (at your option) any later version.}}
+\DoxyCodeLine{7 \textcolor{comment}{//}}
+\DoxyCodeLine{8 \textcolor{comment}{// This program is distributed in the hope that it will be useful,}}
+\DoxyCodeLine{9 \textcolor{comment}{// but WITHOUT ANY WARRANTY; without even the implied warranty of}}
+\DoxyCodeLine{10 \textcolor{comment}{// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the}}
+\DoxyCodeLine{11 \textcolor{comment}{// GNU General Public License for more details.}}
+\DoxyCodeLine{12 \textcolor{comment}{//}}
+\DoxyCodeLine{13 \textcolor{comment}{// You should have received a copy of the GNU General Public License}}
+\DoxyCodeLine{14 \textcolor{comment}{// along with this program.  If not, see <http://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#ifndef KNUTH\_BENDIX\_H}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#define KNUTH\_BENDIX\_H}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include <cstdio>}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#include <concepts>}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{48 }
+\DoxyCodeLine{50 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceKnuthBendix}{KnuthBendix}} \{}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 \textcolor{keyword}{auto} shortlex\_compare(\textcolor{keyword}{const} std::string\& lhs, \textcolor{keyword}{const} std::string\& rhs) \{}
+\DoxyCodeLine{53     \textcolor{keyword}{auto} comp = lhs.length() <=> rhs.length();}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55     \textcolor{keywordflow}{if} (comp == std::strong\_ordering::equal) \{}
+\DoxyCodeLine{56         \textcolor{keywordflow}{return} lhs <=> rhs;}
+\DoxyCodeLine{57     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{58         \textcolor{keywordflow}{return} comp;}
+\DoxyCodeLine{59     \}}
+\DoxyCodeLine{60 \}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{63 \textcolor{keyword}{struct }\mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}} \{}
+\DoxyCodeLine{65     std::string \mbox{\hyperlink{structKnuthBendix_1_1Rule_a983ec8bafa65e3c1721338b29ebf8092}{left}};}
+\DoxyCodeLine{67     std::string \mbox{\hyperlink{structKnuthBendix_1_1Rule_ac672af52f49fc1815e313cebb45b02ca}{right}};}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69     \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}}() = \textcolor{keyword}{delete};}
+\DoxyCodeLine{70     \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}}(std::string \mbox{\hyperlink{structKnuthBendix_1_1Rule_a983ec8bafa65e3c1721338b29ebf8092}{left}}, std::string \mbox{\hyperlink{structKnuthBendix_1_1Rule_ac672af52f49fc1815e313cebb45b02ca}{right}}) : \mbox{\hyperlink{structKnuthBendix_1_1Rule_a983ec8bafa65e3c1721338b29ebf8092}{left}}(std::move(\mbox{\hyperlink{structKnuthBendix_1_1Rule_a983ec8bafa65e3c1721338b29ebf8092}{left}})), \mbox{\hyperlink{structKnuthBendix_1_1Rule_ac672af52f49fc1815e313cebb45b02ca}{right}}(std::move(\mbox{\hyperlink{structKnuthBendix_1_1Rule_ac672af52f49fc1815e313cebb45b02ca}{right}})) \{\};}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{74     \textcolor{keywordtype}{int} \mbox{\hyperlink{structKnuthBendix_1_1Rule_ae8d49430fc4638067da3a0af0294c4d4}{order}}() \{}
+\DoxyCodeLine{75         \textcolor{keywordflow}{if} (shortlex\_compare(this-\/>left, this-\/>right) == std::strong\_ordering::less) \{}
+\DoxyCodeLine{76             std::swap(this-\/>left, this-\/>right);}
+\DoxyCodeLine{77             \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{78         \}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80         \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{81     \}}
+\DoxyCodeLine{82 \};}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{91 \textcolor{keyword}{template}<\textcolor{keyword}{class} L>}
+\DoxyCodeLine{92 \textcolor{keyword}{concept }\mbox{\hyperlink{conceptKnuthBendix_1_1Lookup}{Lookup}} = \textcolor{keyword}{requires}(}
+\DoxyCodeLine{93     L l,}
+\DoxyCodeLine{94     \textcolor{keyword}{const} std::vector<Rule>\& rules,}
+\DoxyCodeLine{95     \textcolor{keyword}{const} std::vector<bool>\& active,}
+\DoxyCodeLine{96     \textcolor{keyword}{const} \textcolor{keywordtype}{int}\& n\_active,}
+\DoxyCodeLine{97     \textcolor{keyword}{const} Rule\& rule,}
+\DoxyCodeLine{98     \textcolor{keywordtype}{size\_t} idx,}
+\DoxyCodeLine{99     std::string\& string}
+\DoxyCodeLine{100 ) \{}
+\DoxyCodeLine{101     \{ L(rules, active, n\_active, 100) \} -\/> std::same\_as<L>;}
+\DoxyCodeLine{104     l.insert(rule, idx);}
+\DoxyCodeLine{106     l.remove(rule);}
+\DoxyCodeLine{108     l.rewrite(\textcolor{keywordtype}{string});}
+\DoxyCodeLine{109 \};}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{112 \textcolor{keyword}{template}<Lookup L>}
+\DoxyCodeLine{113 \textcolor{keyword}{struct }\mbox{\hyperlink{structKnuthBendix_1_1KnuthBendixState}{KnuthBendixState}} \{}
+\DoxyCodeLine{115     std::vector<Rule> \mbox{\hyperlink{structKnuthBendix_1_1KnuthBendixState_aa53996370fd9950a8b0aeb7867dbcb46}{stack}};}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117     \textcolor{comment}{// TODO: This grows continuously, could pause the procedure and prune after}}
+\DoxyCodeLine{118     \textcolor{comment}{//       a number of inactive rules?}}
+\DoxyCodeLine{120 \textcolor{comment}{}    std::vector<Rule> \mbox{\hyperlink{structKnuthBendix_1_1KnuthBendixState_aa875e715485b9967636d88d9c4d36345}{rules}};}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{123     std::vector<bool> \mbox{\hyperlink{structKnuthBendix_1_1KnuthBendixState_a6224a2735f2a2669ad3b588a2113f339}{active}};}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{126     \textcolor{keywordtype}{int} \mbox{\hyperlink{structKnuthBendix_1_1KnuthBendixState_ad9c2cb6779d48de23605f85768b1a735}{n\_active}};}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{129     L \mbox{\hyperlink{structKnuthBendix_1_1KnuthBendixState_aa7b5985be39a068257e5b5239553a786}{lookup}};}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{132     \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{structKnuthBendix_1_1KnuthBendixState_a0d85200cda778cb3c1e5906f2dc04572}{is\_active}}(\textcolor{keywordtype}{size\_t} i) \{}
+\DoxyCodeLine{133         \textcolor{keywordflow}{return} this-\/>active[i];}
+\DoxyCodeLine{134     \}}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{137     \textcolor{keywordtype}{void} \mbox{\hyperlink{structKnuthBendix_1_1KnuthBendixState_ac77ff651658d911245959328c8bac755}{add\_rule}}(\mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}}\&\& rule) \{}
+\DoxyCodeLine{138         this-\/>active.push\_back(\textcolor{keyword}{true});}
+\DoxyCodeLine{139         this-\/>n\_active += 1;}
+\DoxyCodeLine{140         this-\/>rules.push\_back(std::move(rule));}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142         this-\/>lookup.insert(this-\/>rules[\mbox{\hyperlink{structKnuthBendix_1_1KnuthBendixState_aa875e715485b9967636d88d9c4d36345}{rules}}.size() -\/ 1], \mbox{\hyperlink{structKnuthBendix_1_1KnuthBendixState_aa875e715485b9967636d88d9c4d36345}{rules}}.size() -\/ 1);}
+\DoxyCodeLine{143     \}}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{146     \textcolor{keywordtype}{void} \mbox{\hyperlink{structKnuthBendix_1_1KnuthBendixState_a6737644152199cdda19c2adbc040a8c6}{remove\_rule}}(\mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}}\&\& to\_check, \textcolor{keywordtype}{int} i) \{}
+\DoxyCodeLine{147         this-\/>active[i] = \textcolor{keyword}{false};}
+\DoxyCodeLine{148         this-\/>n\_active -\/= 1;}
+\DoxyCodeLine{149         this-\/>stack.push\_back(to\_check);}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151         this-\/>lookup.remove(to\_check);}
+\DoxyCodeLine{152     \}}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{156     \textcolor{keywordtype}{void} \mbox{\hyperlink{structKnuthBendix_1_1KnuthBendixState_af8081630c45b9f2b68eee1354603b63a}{clear\_stack}}() \{}
+\DoxyCodeLine{157         \textcolor{keywordflow}{while} (!this-\/>stack.empty()) \{}
+\DoxyCodeLine{158             \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}} rule = std::move(this-\/>stack.back());}
+\DoxyCodeLine{159             this-\/>stack.pop\_back();}
+\DoxyCodeLine{160             this-\/>lookup.rewrite(rule.\mbox{\hyperlink{structKnuthBendix_1_1Rule_a983ec8bafa65e3c1721338b29ebf8092}{left}});}
+\DoxyCodeLine{161             this-\/>lookup.rewrite(rule.\mbox{\hyperlink{structKnuthBendix_1_1Rule_ac672af52f49fc1815e313cebb45b02ca}{right}});}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163             \textcolor{keywordflow}{if} (rule.\mbox{\hyperlink{structKnuthBendix_1_1Rule_a983ec8bafa65e3c1721338b29ebf8092}{left}} != rule.\mbox{\hyperlink{structKnuthBendix_1_1Rule_ac672af52f49fc1815e313cebb45b02ca}{right}}) \{}
+\DoxyCodeLine{164                 rule.\mbox{\hyperlink{structKnuthBendix_1_1Rule_ae8d49430fc4638067da3a0af0294c4d4}{order}}();}
+\DoxyCodeLine{165                 this-\/>\mbox{\hyperlink{structKnuthBendix_1_1KnuthBendixState_ac77ff651658d911245959328c8bac755}{add\_rule}}(std::move(rule));}
+\DoxyCodeLine{166                 \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}}\& rule\_ = this-\/>rules.back();}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{168                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < this-\/>rules.size() -\/ 1; i++) \{}
+\DoxyCodeLine{169                     \textcolor{keywordflow}{if} (this-\/>\mbox{\hyperlink{structKnuthBendix_1_1KnuthBendixState_a0d85200cda778cb3c1e5906f2dc04572}{is\_active}}(i)) \{}
+\DoxyCodeLine{170                         \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}}\& to\_check = this-\/>rules[i];}
+\DoxyCodeLine{171                         \textcolor{keywordflow}{if} (to\_check.\mbox{\hyperlink{structKnuthBendix_1_1Rule_a983ec8bafa65e3c1721338b29ebf8092}{left}}.find(rule\_.\mbox{\hyperlink{structKnuthBendix_1_1Rule_a983ec8bafa65e3c1721338b29ebf8092}{left}}) != std::string::npos) \{}
+\DoxyCodeLine{172                             this-\/>\mbox{\hyperlink{structKnuthBendix_1_1KnuthBendixState_a6737644152199cdda19c2adbc040a8c6}{remove\_rule}}(std::move(to\_check), i);}
+\DoxyCodeLine{173                         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (to\_check.\mbox{\hyperlink{structKnuthBendix_1_1Rule_ac672af52f49fc1815e313cebb45b02ca}{right}}.find(rule\_.\mbox{\hyperlink{structKnuthBendix_1_1Rule_a983ec8bafa65e3c1721338b29ebf8092}{left}}) != std::string::npos) \{}
+\DoxyCodeLine{174                             this-\/>lookup.rewrite(to\_check.\mbox{\hyperlink{structKnuthBendix_1_1Rule_ac672af52f49fc1815e313cebb45b02ca}{right}});}
+\DoxyCodeLine{175                         \}}
+\DoxyCodeLine{176                     \}}
+\DoxyCodeLine{177                 \}}
+\DoxyCodeLine{178             \}}
+\DoxyCodeLine{179         \}}
+\DoxyCodeLine{180     \}}
+\DoxyCodeLine{181 }
+\DoxyCodeLine{185     \textcolor{keywordtype}{void} \mbox{\hyperlink{structKnuthBendix_1_1KnuthBendixState_a9fd62c21c7a9079d55fd94e8e739573c}{overlap}}(\textcolor{keywordtype}{size\_t} i, \textcolor{keywordtype}{size\_t} j) \{}
+\DoxyCodeLine{186         \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}}\& a = this-\/>rules[i];}
+\DoxyCodeLine{187         \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}}\& b = this-\/>rules[j];}
+\DoxyCodeLine{188 }
+\DoxyCodeLine{189         \textcolor{keywordtype}{size\_t} m = std::min(a.\mbox{\hyperlink{structKnuthBendix_1_1Rule_a983ec8bafa65e3c1721338b29ebf8092}{left}}.length(), b.\mbox{\hyperlink{structKnuthBendix_1_1Rule_a983ec8bafa65e3c1721338b29ebf8092}{left}}.length());}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{191         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} k = 1; k < m; k++) \{}
+\DoxyCodeLine{192             \textcolor{comment}{// Refresh references.}}
+\DoxyCodeLine{193             \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}}\& a = this-\/>rules[i];}
+\DoxyCodeLine{194             \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}}\& b = this-\/>rules[j];}
+\DoxyCodeLine{195             std::string\_view suffix \{a.\mbox{\hyperlink{structKnuthBendix_1_1Rule_a983ec8bafa65e3c1721338b29ebf8092}{left}}.data() + (a.\mbox{\hyperlink{structKnuthBendix_1_1Rule_a983ec8bafa65e3c1721338b29ebf8092}{left}}.length() -\/ k), k\};}
+\DoxyCodeLine{196 }
+\DoxyCodeLine{197             \textcolor{keywordflow}{if} (b.\mbox{\hyperlink{structKnuthBendix_1_1Rule_a983ec8bafa65e3c1721338b29ebf8092}{left}}.starts\_with(suffix)) \{}
+\DoxyCodeLine{198                 \textcolor{comment}{// a.left = XY, b.left = YZ}}
+\DoxyCodeLine{199                 \textcolor{comment}{// xbr = X|b.right, arz = a.right|Z}}
+\DoxyCodeLine{200                 std::string xbr;}
+\DoxyCodeLine{201                 xbr.reserve(a.\mbox{\hyperlink{structKnuthBendix_1_1Rule_a983ec8bafa65e3c1721338b29ebf8092}{left}}.length() -\/ k + b.\mbox{\hyperlink{structKnuthBendix_1_1Rule_ac672af52f49fc1815e313cebb45b02ca}{right}}.length());}
+\DoxyCodeLine{202                 xbr.append(a.\mbox{\hyperlink{structKnuthBendix_1_1Rule_a983ec8bafa65e3c1721338b29ebf8092}{left}}, 0, a.\mbox{\hyperlink{structKnuthBendix_1_1Rule_a983ec8bafa65e3c1721338b29ebf8092}{left}}.length() -\/ k);}
+\DoxyCodeLine{203                 xbr.append(b.\mbox{\hyperlink{structKnuthBendix_1_1Rule_ac672af52f49fc1815e313cebb45b02ca}{right}});}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{205                 std::string arz;}
+\DoxyCodeLine{206                 arz.reserve(a.\mbox{\hyperlink{structKnuthBendix_1_1Rule_ac672af52f49fc1815e313cebb45b02ca}{right}}.length() + b.\mbox{\hyperlink{structKnuthBendix_1_1Rule_a983ec8bafa65e3c1721338b29ebf8092}{left}}.length() -\/ k);}
+\DoxyCodeLine{207                 arz.append(a.\mbox{\hyperlink{structKnuthBendix_1_1Rule_ac672af52f49fc1815e313cebb45b02ca}{right}});}
+\DoxyCodeLine{208                 arz.append(b.\mbox{\hyperlink{structKnuthBendix_1_1Rule_a983ec8bafa65e3c1721338b29ebf8092}{left}}, k, b.\mbox{\hyperlink{structKnuthBendix_1_1Rule_a983ec8bafa65e3c1721338b29ebf8092}{left}}.length() -\/ k);}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{210                 this-\/>stack.emplace\_back(xbr, arz);}
+\DoxyCodeLine{211                 this-\/>\mbox{\hyperlink{structKnuthBendix_1_1KnuthBendixState_af8081630c45b9f2b68eee1354603b63a}{clear\_stack}}();}
+\DoxyCodeLine{212 }
+\DoxyCodeLine{213                 \textcolor{keywordflow}{if} (!(this-\/>\mbox{\hyperlink{structKnuthBendix_1_1KnuthBendixState_a0d85200cda778cb3c1e5906f2dc04572}{is\_active}}(i) \&\& this-\/>\mbox{\hyperlink{structKnuthBendix_1_1KnuthBendixState_a0d85200cda778cb3c1e5906f2dc04572}{is\_active}}(j))) \{}
+\DoxyCodeLine{214                     \textcolor{keywordflow}{return};}
+\DoxyCodeLine{215                 \}}
+\DoxyCodeLine{216             \}}
+\DoxyCodeLine{217         \}}
+\DoxyCodeLine{218     \}}
+\DoxyCodeLine{219 }
+\DoxyCodeLine{220     \mbox{\hyperlink{structKnuthBendix_1_1KnuthBendixState}{KnuthBendixState}}(\textcolor{keyword}{const} std::vector<Rule>\& initial\_rules)}
+\DoxyCodeLine{221         : \mbox{\hyperlink{structKnuthBendix_1_1KnuthBendixState_aa7b5985be39a068257e5b5239553a786}{lookup}}(\mbox{\hyperlink{structKnuthBendix_1_1KnuthBendixState_aa875e715485b9967636d88d9c4d36345}{rules}}, \mbox{\hyperlink{structKnuthBendix_1_1KnuthBendixState_a6224a2735f2a2669ad3b588a2113f339}{active}}, \mbox{\hyperlink{structKnuthBendix_1_1KnuthBendixState_ad9c2cb6779d48de23605f85768b1a735}{n\_active}}, initial\_rules.size())}
+\DoxyCodeLine{222     \{}
+\DoxyCodeLine{223         this-\/>stack.reserve(initial\_rules.size());}
+\DoxyCodeLine{224         this-\/>rules.reserve(initial\_rules.size());}
+\DoxyCodeLine{225         this-\/>active.reserve(initial\_rules.size());}
+\DoxyCodeLine{226         this-\/>n\_active = 0;}
+\DoxyCodeLine{227 }
+\DoxyCodeLine{228         \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}}\& rule : initial\_rules) \{}
+\DoxyCodeLine{229             this-\/>stack.push\_back(rule);}
+\DoxyCodeLine{230             this-\/>\mbox{\hyperlink{structKnuthBendix_1_1KnuthBendixState_af8081630c45b9f2b68eee1354603b63a}{clear\_stack}}();}
+\DoxyCodeLine{231         \}}
+\DoxyCodeLine{232     \}}
+\DoxyCodeLine{233 \};}
+\DoxyCodeLine{234 }
+\DoxyCodeLine{237 \textcolor{keyword}{template}<Lookup L>}
+\DoxyCodeLine{238 std::vector<Rule> \mbox{\hyperlink{namespaceKnuthBendix_a23186d5d6dc8951dac2d83b126315c8a}{knuthbendix}}(\textcolor{keyword}{const} std::vector<Rule>\& initial\_rules) \{}
+\DoxyCodeLine{239     \textcolor{comment}{// Setup}}
+\DoxyCodeLine{240     \mbox{\hyperlink{structKnuthBendix_1_1KnuthBendixState}{KnuthBendixState<L>}} state \{initial\_rules\};}
+\DoxyCodeLine{241 }
+\DoxyCodeLine{242     \textcolor{comment}{// Check overlaps}}
+\DoxyCodeLine{243     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < state.rules.size(); i++) \{}
+\DoxyCodeLine{244 \textcolor{preprocessor}{        \#ifndef BENCHMARK}}
+\DoxyCodeLine{245             printf(\textcolor{stringliteral}{"{}\(\backslash\)rActive/Generated Rules: \%d/\%zu"{}}, state.n\_active, state.rules.size());}
+\DoxyCodeLine{246             fflush(stdout);}
+\DoxyCodeLine{247 \textcolor{preprocessor}{        \#endif}}
+\DoxyCodeLine{248         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} j = 0; j <= i \&\& state.is\_active(i); j++) \{}
+\DoxyCodeLine{249             \textcolor{keywordflow}{if} (state.is\_active(j)) state.overlap(i, j);}
+\DoxyCodeLine{250             \textcolor{keywordflow}{if} (j < i \&\& state.is\_active(j) \&\& state.is\_active(i)) \{}
+\DoxyCodeLine{251                 state.overlap(j, i);}
+\DoxyCodeLine{252             \}}
+\DoxyCodeLine{253         \}}
+\DoxyCodeLine{254     \}}
+\DoxyCodeLine{255 }
+\DoxyCodeLine{256 \textcolor{preprocessor}{    \#ifndef BENCHMARK}}
+\DoxyCodeLine{257         printf(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{258 \textcolor{preprocessor}{    \#endif}}
+\DoxyCodeLine{259 }
+\DoxyCodeLine{260     std::vector<Rule> confluent;}
+\DoxyCodeLine{261     confluent.reserve(state.n\_active);}
+\DoxyCodeLine{262 }
+\DoxyCodeLine{263     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < state.rules.size(); i++) \{}
+\DoxyCodeLine{264         \textcolor{keywordflow}{if} (state.is\_active(i)) \{}
+\DoxyCodeLine{265             confluent.push\_back(std::move(state.rules[i]));}
+\DoxyCodeLine{266         \}}
+\DoxyCodeLine{267     \}}
+\DoxyCodeLine{268 }
+\DoxyCodeLine{269     \textcolor{keywordflow}{return} confluent;}
+\DoxyCodeLine{270 \}}
+\DoxyCodeLine{271 }
+\DoxyCodeLine{272 \}}
+\DoxyCodeLine{273 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

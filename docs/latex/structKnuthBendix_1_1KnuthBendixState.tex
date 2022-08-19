@@ -1,0 +1,60 @@
+\hypertarget{structKnuthBendix_1_1KnuthBendixState}{}\doxysection{Knuth\+Bendix\+::Knuth\+Bendix\+State\texorpdfstring{$<$}{<} L \texorpdfstring{$>$}{>} Struct Template Reference}
+\label{structKnuthBendix_1_1KnuthBendixState}\index{KnuthBendix::KnuthBendixState$<$ L $>$@{KnuthBendix::KnuthBendixState$<$ L $>$}}
+
+
+Contains the state of the Knuth-\/\+Bendix procedure.  
+
+
+
+
+{\ttfamily \#include $<$knuth\+\_\+bendix.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1KnuthBendixState_a0d85200cda778cb3c1e5906f2dc04572}\label{structKnuthBendix_1_1KnuthBendixState_a0d85200cda778cb3c1e5906f2dc04572}} 
+bool {\bfseries is\+\_\+active} (size\+\_\+t i)
+\begin{DoxyCompactList}\small\item\em Returns whether the rule at index {\ttfamily i} in \mbox{\hyperlink{structKnuthBendix_1_1KnuthBendixState_aa875e715485b9967636d88d9c4d36345}{rules}} is active. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1KnuthBendixState_ac77ff651658d911245959328c8bac755}\label{structKnuthBendix_1_1KnuthBendixState_ac77ff651658d911245959328c8bac755}} 
+void {\bfseries add\+\_\+rule} (\mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}} \&\&rule)
+\begin{DoxyCompactList}\small\item\em Adds a new rule to the list of active rules. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1KnuthBendixState_a6737644152199cdda19c2adbc040a8c6}\label{structKnuthBendix_1_1KnuthBendixState_a6737644152199cdda19c2adbc040a8c6}} 
+void {\bfseries remove\+\_\+rule} (\mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}} \&\&to\+\_\+check, int i)
+\begin{DoxyCompactList}\small\item\em Removes a rule from the list of active rules and places it on the stack. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1KnuthBendixState_af8081630c45b9f2b68eee1354603b63a}\label{structKnuthBendix_1_1KnuthBendixState_af8081630c45b9f2b68eee1354603b63a}} 
+void {\bfseries clear\+\_\+stack} ()
+\begin{DoxyCompactList}\small\item\em Pops each rule from the stack, adds it to the rewriting system, and removes newly redundent rules. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1KnuthBendixState_a9fd62c21c7a9079d55fd94e8e739573c}\label{structKnuthBendix_1_1KnuthBendixState_a9fd62c21c7a9079d55fd94e8e739573c}} 
+void {\bfseries overlap} (size\+\_\+t i, size\+\_\+t j)
+\begin{DoxyCompactList}\small\item\em checks for all overlaps between the end of the rule at index {\ttfamily i} and the rule at index {\ttfamily j}. Creates a new rule if rewriting the resulting string differs using the two rules. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1KnuthBendixState_ae3ddc0960e33552ab54051ed24f71329}\label{structKnuthBendix_1_1KnuthBendixState_ae3ddc0960e33552ab54051ed24f71329}} 
+{\bfseries Knuth\+Bendix\+State} (const std\+::vector$<$ \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}} $>$ \&initial\+\_\+rules)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1KnuthBendixState_aa53996370fd9950a8b0aeb7867dbcb46}\label{structKnuthBendix_1_1KnuthBendixState_aa53996370fd9950a8b0aeb7867dbcb46}} 
+std\+::vector$<$ \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}} $>$ {\bfseries stack}
+\begin{DoxyCompactList}\small\item\em The stack of rules which are yet to be added to the list of active rules. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1KnuthBendixState_aa875e715485b9967636d88d9c4d36345}\label{structKnuthBendix_1_1KnuthBendixState_aa875e715485b9967636d88d9c4d36345}} 
+std\+::vector$<$ \mbox{\hyperlink{structKnuthBendix_1_1Rule}{Rule}} $>$ {\bfseries rules}
+\begin{DoxyCompactList}\small\item\em The list of all rules which have been active. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1KnuthBendixState_a6224a2735f2a2669ad3b588a2113f339}\label{structKnuthBendix_1_1KnuthBendixState_a6224a2735f2a2669ad3b588a2113f339}} 
+std\+::vector$<$ bool $>$ {\bfseries active}
+\begin{DoxyCompactList}\small\item\em If an entry is true, then the corresponding entry in \mbox{\hyperlink{structKnuthBendix_1_1KnuthBendixState_aa875e715485b9967636d88d9c4d36345}{rules}} is active. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1KnuthBendixState_ad9c2cb6779d48de23605f85768b1a735}\label{structKnuthBendix_1_1KnuthBendixState_ad9c2cb6779d48de23605f85768b1a735}} 
+int {\bfseries n\+\_\+active}
+\begin{DoxyCompactList}\small\item\em The number of active rules. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structKnuthBendix_1_1KnuthBendixState_aa7b5985be39a068257e5b5239553a786}\label{structKnuthBendix_1_1KnuthBendixState_aa7b5985be39a068257e5b5239553a786}} 
+L {\bfseries lookup}
+\begin{DoxyCompactList}\small\item\em The rule lookup struct. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$Lookup L$>$\newline
+struct Knuth\+Bendix\+::\+Knuth\+Bendix\+State$<$ L $>$}
+Contains the state of the Knuth-\/\+Bendix procedure. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Knuth\+Bendix/knuth\+\_\+bendix.\+hpp\end{DoxyCompactItemize}

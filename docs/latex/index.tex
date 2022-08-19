@@ -1,0 +1,19 @@
+This is a header-\/only c++20 library for running the \href{https://en.wikipedia.org/wiki/Knuth\%E2\%80\%93Bendix_completion_algorithm}{\texttt{ Knuth-\/\+Bendix procedure}} with different rule lookup strategies. Lookup strategies must expose member functions for inserting and removing rules, and rewriting strings. Three such strategies are implemented by default\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{structKnuthBendix_1_1NaiveLookup}{Knuth\+Bendix\+::\+Naive\+Lookup}} which simply checks every active rule,
+\item \mbox{\hyperlink{structKnuthBendix_1_1OrderedLookup}{Knuth\+Bendix\+::\+Ordered\+Lookup}} which stores rules in reverse lexicorgraphic order to find suffixes using a binary search,
+\item \mbox{\hyperlink{structKnuthBendix_1_1TrieLookup}{Knuth\+Bendix\+::\+Trie\+Lookup}} which can find prefixes in time linear to the length of the string.
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::vector<KnuthBendix::Rule> rules = \{}
+\DoxyCodeLine{    \mbox{\hyperlink{structKnuthBendix_1_1Rule}{KnuthBendix::Rule}} \{\textcolor{stringliteral}{"{}aa"{}},     \textcolor{stringliteral}{"{}"{}}\},}
+\DoxyCodeLine{    \mbox{\hyperlink{structKnuthBendix_1_1Rule}{KnuthBendix::Rule}} \{\textcolor{stringliteral}{"{}bbb"{}},    \textcolor{stringliteral}{"{}"{}}\},}
+\DoxyCodeLine{    \mbox{\hyperlink{structKnuthBendix_1_1Rule}{KnuthBendix::Rule}} \{\textcolor{stringliteral}{"{}ababab"{}}, \textcolor{stringliteral}{"{}"{}}\}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::vector<KnuthBendix::Rule> confluent =  KnuthBendix::knuthbendix<KnuthBendix::TrieLookup>(rules);}
+
+\end{DoxyCode}
+ 
