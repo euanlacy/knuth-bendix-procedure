@@ -24,8 +24,8 @@ int main() {
         KnuthBendix::Rule { "acabacabacabacab",  "cabacabacabacaba"}
     };
 
-    run<KnuthBendix::OrderedLookup>(rules);
-    /* run<KnuthBendix::TrieLookup>(rules); */
+    /* run<KnuthBendix::OrderedLookup>(rules); */
+    run<KnuthBendix::TrieLookup>(rules);
     /* run<KnuthBendix::HatTrieLookup>(rules); */
     /* run<KnuthBendix::NaiveLookup>(rules); */
 }

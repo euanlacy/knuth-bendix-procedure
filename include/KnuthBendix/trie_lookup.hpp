@@ -32,7 +32,6 @@ struct TrieLookup {
     // TODO: custom allocator which allocates TrieNodes contiguously for better
     //       cache performance.
     using TrieNodePtr = std::unique_ptr<TrieNode>;
-    using RuleIndex = size_t;
 
     struct TrieNode {
         std::array<TrieNodePtr, ALPHABET_SIZE> children; 

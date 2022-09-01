@@ -49,7 +49,9 @@
 /// This is the root namespace
 namespace KnuthBendix {
 
-auto shortlex_compare(const std::string& lhs, const std::string& rhs) {
+using RuleIndex = size_t;
+
+inline auto shortlex_compare(const std::string& lhs, const std::string& rhs) {
     auto comp = lhs.length() <=> rhs.length();
 
     if (comp == std::strong_ordering::equal) {
@@ -67,7 +69,7 @@ struct Rule {
     std::string right;
 
     Rule() = delete;
-    Rule(std::string left, std::string right) : left(std::move(left)), right(std::move(right)) {};
+    Rule(std::string _left, std::string _right) : left(std::move(_left)), right(std::move(_right)) {};
 
     /// @brief Swaps left and right such that left <= right under
     ///        length-lexicographical ordering.
@@ -95,7 +97,7 @@ concept Lookup = requires(
     const std::vector<bool>& active,
     const int& n_active,
     const Rule& rule,
-    size_t idx,
+    RuleIndex idx,
     std::string& string
 ) {
     { L(rules, active, n_active, 100) } -> std::same_as<L>;
@@ -129,7 +131,7 @@ struct KnuthBendixState {
     L lookup;
 
     /// @brief Returns whether the rule at index @p i in @ref rules is active.
-    inline bool is_active(size_t i) {
+    inline bool is_active(RuleIndex i) {
         return this->active[i];
     }
 
@@ -165,7 +167,7 @@ struct KnuthBendixState {
                 this->add_rule(std::move(rule));
                 Rule& rule_ = this->rules.back();
 
-                for (size_t i = 0; i < this->rules.size() - 1; i++) {
+                for (RuleIndex i = 0; i < this->rules.size() - 1; i++) {
                     if (this->is_active(i)) {
                         Rule& to_check = this->rules[i];
                         if (to_check.left.find(rule_.left) != std::string::npos) {
@@ -182,14 +184,8 @@ struct KnuthBendixState {
     /// @brief checks for all overlaps between the end of the rule at index @p i
     /// and the rule at index @p j. Creates a new rule if rewriting the
     /// resulting string differs using the two rules.
-    void overlap(size_t i, size_t j) {
-        Rule& a = this->rules[i];
-        Rule& b = this->rules[j];
-
-        size_t m = std::min(a.left.length(), b.left.length());
-
-        for (size_t k = 1; k < m; k++) {
-            // Refresh references.
+    void overlap(RuleIndex i, RuleIndex j) {
+        for (RuleIndex k = 1; k < std::min(rules[i].left.length(), rules[j].left.length()); k++) {
             Rule& a = this->rules[i];
             Rule& b = this->rules[j];
             std::string_view suffix {a.left.data() + (a.left.length() - k), k};
@@ -240,12 +236,12 @@ std::vector<Rule> knuthbendix(const std::vector<Rule>& initial_rules) {
     KnuthBendixState<L> state {initial_rules};
 
     // Check overlaps
-    for (size_t i = 0; i < state.rules.size(); i++) {
+    for (RuleIndex i = 0; i < state.rules.size(); i++) {
         #ifndef BENCHMARK
             printf("\rActive/Generated Rules: %d/%zu", state.n_active, state.rules.size());
             fflush(stdout);
         #endif
-        for (size_t j = 0; j <= i && state.is_active(i); j++) {
+        for (RuleIndex j = 0; j <= i && state.is_active(i); j++) {
             if (state.is_active(j)) state.overlap(i, j);
             if (j < i && state.is_active(j) && state.is_active(i)) {
                 state.overlap(j, i);
@@ -260,7 +256,7 @@ std::vector<Rule> knuthbendix(const std::vector<Rule>& initial_rules) {
     std::vector<Rule> confluent;
     confluent.reserve(state.n_active);
 
-    for (size_t i = 0; i < state.rules.size(); i++) {
+    for (RuleIndex i = 0; i < state.rules.size(); i++) {
         if (state.is_active(i)) {
             confluent.push_back(std::move(state.rules[i]));
         }

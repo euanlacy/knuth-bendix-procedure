@@ -51,7 +51,7 @@ struct NaiveLookup {
             u_start++;
 
             // for (p, q) in rules
-            for (size_t i = 0; i < this->rules.size(); i++) {
+            for (RuleIndex i = 0; i < this->rules.size(); i++) {
                 if (!this->active[i]) continue;
                 // if v = rp
                 const Rule& rule = this->rules[i];
@@ -77,7 +77,7 @@ struct NaiveLookup {
         string.erase(v_len, string.length());
     }
 
-    void inline insert(const Rule& rule, size_t idx) {
+    void inline insert(const Rule& rule, RuleIndex idx) {
         (void)rule;
         (void)idx;
     }

@@ -24,7 +24,7 @@
 
 namespace KnuthBendix {
 
-std::strong_ordering reverse_lex(const std::string_view lhs, const std::string_view rhs) {
+inline std::strong_ordering reverse_lex(const std::string_view lhs, const std::string_view rhs) {
     auto lbegin = lhs.cbegin();
     auto left = lhs.cend();
 
@@ -46,7 +46,7 @@ std::strong_ordering reverse_lex(const std::string_view lhs, const std::string_v
     }
 }
 
-std::strong_ordering compare_prefix(const std::string_view lhs, const std::string_view rhs) {
+inline std::strong_ordering compare_prefix(const std::string_view lhs, const std::string_view rhs) {
     auto lbegin = lhs.cbegin();
     auto left = lhs.cend() - 1;
 
@@ -69,8 +69,6 @@ std::strong_ordering compare_prefix(const std::string_view lhs, const std::strin
         return std::strong_ordering::less;
     }
 }
-
-using RuleIndex = size_t;
 
 struct OrderedLookup {
     // References to members of the KnuthBendixState
@@ -167,7 +165,7 @@ struct OrderedLookup {
         }
     }
 
-    void insert(const Rule& rule, size_t idx) {
+    void insert(const Rule& rule, RuleIndex idx) {
         RuleIndex index = this->binary_search(rule);
 
         auto pos = this->sorted_indices.begin() + index;
